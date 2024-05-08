@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from autogen.agentchat import Agent
 
@@ -107,13 +107,11 @@ def invert_disallowed_to_allowed(disallowed_speaker_transitions_dict: dict, agen
             agent for agent in allowed_speaker_transitions_dict[key] if agent not in value
         ]
 
-	return allowed_speaker_transitions_dict
+    return allowed_speaker_transitions_dict
 
 
 def visualize_speaker_transitions_dict(
-    speaker_transitions_dict: dict,
-    agents: List[Agent],
-    export_path: Optional[str] = None
+    speaker_transitions_dict: dict, agents: List[Agent], export_path: Optional[str] = None
 ):
     """
     Visualize the speaker_transitions_dict using networkx.
@@ -132,7 +130,7 @@ def visualize_speaker_transitions_dict(
 
     # Add edges
     for key, value in speaker_transitions_dict.items():
-		for agent in value:
+        for agent in value:
             G.add_edge(key.name, agent.name)
 
     # Visualize
