@@ -111,34 +111,34 @@ def invert_disallowed_to_allowed(disallowed_speaker_transitions_dict: dict, agen
 
 
 def visualize_speaker_transitions_dict(
-	speaker_transitions_dict: dict,
-	agents: List[Agent], 
-	export_path: Optional[str] = None
+    speaker_transitions_dict: dict,
+    agents: List[Agent],
+    export_path: Optional[str] = None
 ):
-	"""
-	Visualize the speaker_transitions_dict using networkx.
-	"""
-	try:
-		import matplotlib.pyplot as plt
-		import networkx as nx
-	except ImportError as e:
-		logging.fatal("Failed to import networkx or matplotlib. Try running 'pip install autogen[graphs]'")
-		raise e
+    """
+    Visualize the speaker_transitions_dict using networkx.
+    """
+    try:
+        import matplotlib.pyplot as plt
+        import networkx as nx
+    except ImportError as e:
+        logging.fatal("Failed to import networkx or matplotlib. Try running 'pip install autogen[graphs]'")
+        raise e
 
-	G = nx.DiGraph()
+    G = nx.DiGraph()
 
-	# Add nodes
-	G.add_nodes_from([agent.name for agent in agents])
+    # Add nodes
+    G.add_nodes_from([agent.name for agent in agents])
 
-	# Add edges
-	for key, value in speaker_transitions_dict.items():
+    # Add edges
+    for key, value in speaker_transitions_dict.items():
 		for agent in value:
-			G.add_edge(key.name, agent.name)
+            G.add_edge(key.name, agent.name)
 
-	# Visualize
-	nx.draw(G, with_labels=True, font_weight="bold")
+    # Visualize
+    nx.draw(G, with_labels=True, font_weight="bold")
 
-	if export_path is not None:
-		plt.savefig(export_path)
-	else:
-		plt.show()
+    if export_path is not None:
+        plt.savefig(export_path)
+    else:
+        plt.show()
